@@ -27,7 +27,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 {{-- <a href="#" class="text-gray-500 hover:text-indigo-900">Delete</a> --}}
-                                <form action="/admin/posts/{{$post->slug}}" method="post">
+                                <form action="/admin/posts/{{$post->id}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-gray-500 hover:text-indigo-900">Delete</button>

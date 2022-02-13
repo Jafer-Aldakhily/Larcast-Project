@@ -31,6 +31,7 @@
                         <button class="text-xs font-bold uppercase">Welcome, {{auth()->user()->name}}</button>
                         </x-slot>
 
+                    @admin
                     <x-dropdown-item href="/admin/posts" :active="request()->routeIs('admin.all.posts')" >
                         Dashboard
                     </x-dropdown-item>
@@ -38,6 +39,7 @@
                     <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('admin.create.post')">
                         New Post
                     </x-dropdown-item>
+                    @endadmin
 
                     <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">
                         Log Out

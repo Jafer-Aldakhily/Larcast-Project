@@ -26,7 +26,7 @@ Route::post('/newsletter' , NewsletterController::class); // this is sigle actio
 
 Route::get('/', [PostController::class , 'index'])->name('home');
 
-Route::get('/posts/{post}' ,[PostController::class , 'show'])
+Route::get('/posts/{post:slug}' ,[PostController::class , 'show'])
 ;
 Route::post('/posts/{post:slug}/comments' , [PostCommentController::class , 'store']);
 
@@ -39,10 +39,6 @@ Route::post('/login' , [SessionController::class , 'store'])->middleware('guest'
 Route::post('/logout' , [SessionController::class , 'destroy'])->middleware('auth');
 
 // Admin
-Route::get('/admin/posts/create', [AdminController::class, 'create'])->middleware('admin')->name('admin.create.post');
-Route::post('/admin/posts', [AdminController::class, 'store'])->middleware('admin');
-
-Route::get('/admin/posts' , [AdminController::class, 'index'])->middleware('admin')->name('admin.all.posts');
-Route::get('/admin/posts/{post}/edit' , [AdminController::class, 'edit'])->middleware('admin');
-Route::patch('/admin/posts/{post}' , [AdminController::class,'update'])->middleware('admin');
-Route::delete('/admin/posts/{post:slug}' , [AdminController::class,'destroy'])->middleware('admin');
+Route::middleware('can:admin')->group(function(){
+    Route::resource('/admin/posts',AdminController::class)->except('show');  
+});

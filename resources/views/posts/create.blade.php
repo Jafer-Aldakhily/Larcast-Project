@@ -25,12 +25,13 @@
                     $categories = App\Models\Category::all();
                 @endphp
                 <select name="category_id" id="category_id">
+                    <option selected>None</option>
                     @foreach ($categories as $category)
                     <option value="{{$category->id}}">{{ucwords($category->name)}}</option>                        
                     @endforeach
                 </select>
     
-                <x-form.error name="error" />
+                <x-form.error name="category_id" />
     
              </x-form.field>
     
